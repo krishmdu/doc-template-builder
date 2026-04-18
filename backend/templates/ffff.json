@@ -1,0 +1,25 @@
+{
+  "name": "ffff",
+  "elements": [
+    {
+      "id": "1776531725414",
+      "type": "text",
+      "content": "hi  {{name}}\nWelcome to  {{company}}\nYour date of joining will be  {{doj::date}}"
+    }
+  ],
+  "variableStyles": {},
+  "schema": {
+    "name": {
+      "type": "string",
+      "label": "Name"
+    },
+    "company": {
+      "type": "string",
+      "label": "Company"
+    },
+    "doj": {
+      "type": "date",
+      "label": "Doj"
+    }
+  }
+}

@@ -1,34 +1,108 @@
 import { useStore } from "./store";
+import { useState } from "react";
 
 export default function PropertiesPanel() {
-  const selected = useStore((s: any) => s.selected);
-  const update = useStore((s: any) => s.updateElement);
+  const elements = useStore((s: any) => s.elements);
+  const variableStyles = useStore((s: any) => s.variableStyles);
+  const updateVar = useStore((s: any) => s.updateVariableStyle);
 
-  if (!selected) return <div>Select element</div>;
+  const [selectedVar, setSelectedVar] = useState("");
+
+  // 🔥 SAFE variable extraction
+  const extractVariables = () => {
+    const vars = new Set<string>();
+
+    elements.forEach((el: any) => {
+      let text = "";
+
+      // ✅ CASE 1: string
+      if (typeof el.content === "string") {
+        text = el.content;
+      }
+
+      // ✅ CASE 2: Slate-like array
+      else if (Array.isArray(el.content)) {
+        el.content.forEach((node: any) => {
+          if (node.children) {
+            node.children.forEach((child: any) => {
+              text += child.text || "";
+            });
+          }
+        });
+      }
+
+      // 🔍 Extract variables
+      const matches = text.match(/\{\{(.*?)\}\}/g);
+      if (matches) {
+        matches.forEach((m: string) => {
+          vars.add(m.replace("{{", "").replace("}}", "").trim());
+        });
+      }
+    });
+
+    return Array.from(vars);
+  };
+
+  const variables = extractVariables();
+  const style = variableStyles[selectedVar] || {};
 
   return (
-    <div>
-      <h3>Properties</h3>
+    <div style={{ padding: 10 }}>
+      <h3>Variable Properties</h3>
 
-      {(selected.type === "text" ||
-        selected.type === "dynamic-text") && (
-        <input
-          value={selected.content}
-          onChange={(e) =>
-            update(selected.id, { content: e.target.value })
-          }
-        />
-      )}
+      <select
+        value={selectedVar}
+        onChange={(e) => setSelectedVar(e.target.value)}
+      >
+        <option value="">Select Variable</option>
+        {variables.map((v) => (
+          <option key={v} value={v}>
+            {`{{${v}}}`}
+          </option>
+        ))}
+      </select>
 
-      {selected.type === "text-switch" && (
-        <textarea
-          placeholder='[{ "condition": "location == \"India\"", "value": "PF" }]'
-          onChange={(e) =>
-            update(selected.id, {
-              rules: JSON.parse(e.target.value || "[]"),
-            })
-          }
-        />
+      {selectedVar && (
+        <>
+          <div>
+            <label>Font Size</label>
+            <input
+              type="number"
+              value={style.fontSize || ""}
+              onChange={(e) =>
+                updateVar(selectedVar, {
+                  fontSize: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <div>
+            <label>Color</label>
+            <input
+              type="color"
+              value={style.color || "#000000"}
+              onChange={(e) =>
+                updateVar(selectedVar, {
+                  color: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <div>
+            <label>Bold</label>
+            <input
+              type="checkbox"
+              checked={style.bold || false}
+              onChange={(e) =>
+                updateVar(selectedVar, {
+                  bold: e.target.checked,
+                })
+              }
+            />
+          </div>
+        </>
       )}
     </div>
   );

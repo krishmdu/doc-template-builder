@@ -1,0 +1,54 @@
+{
+  "name": "location transfer letter",
+  "elements": [
+    {
+      "id": "1776533297055",
+      "type": "text",
+      "content": "Dear  {{name}}\nThis Location Transfer Letter is to formally notify you of a change in your assigned work location with {{company name}} . The purpose of this letter is to confirm the details of the transfer and the actions required to complete the move.  \n- You are required to report to  {{manager}}  at the new location on   {{report date::date}}\nThanks\n {{HR Name}}"
+    }
+  ],
+  "variableStyles": {
+    "name": {
+      "fontSize": "25",
+      "color": "#cf2020",
+      "bold": true
+    },
+    "company name": {
+      "fontSize": "20",
+      "color": "#2c50e2",
+      "bold": true
+    },
+    "manager": {
+      "color": "#2cdd41"
+    },
+    "report date::date": {
+      "color": "#2addea"
+    },
+    "HR Name": {
+      "color": "#eb0f0f",
+      "bold": true
+    }
+  },
+  "schema": {
+    "name": {
+      "type": "string",
+      "label": "Name"
+    },
+    "company name": {
+      "type": "string",
+      "label": "Company Name"
+    },
+    "manager": {
+      "type": "string",
+      "label": "Manager"
+    },
+    "report date": {
+      "type": "date",
+      "label": "Report Date"
+    },
+    "HR Name": {
+      "type": "string",
+      "label": "Hr Name"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "ui_template",
+  "elements": [
+    {
+      "id": "d4f09082-6877-4db1-806a-9969a9a0a3a6",
+      "type": "text",
+      "content": "hi {{employee_first_name}}\nWelcome to XYZ family!. \nYou will start journey with us on {{employee_DOJ}} as {{employee_grade}}\nYou will report at {{employee_branch}} office on {{employee_doc_verification}} for document submitting. ",
+      "data": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "C",
+          "D"
+        ]
+      ],
+      "rows": 2,
+      "cols": 2,
+      "rules": []
+    }
+  ],
+  "variableStyles": {
+    "employee_first_name": {
+      "color": "#1499db"
+    },
+    "employee_DOJ": {
+      "color": "#bddf11"
+    },
+    "employee_grade": {
+      "color": "#6231d3"
+    }
+  },
+  "schema": {
+    "employee_first_name": {
+      "type": "string",
+      "label": "Employee First Name"
+    },
+    "employee_grade": {
+      "type": "string",
+      "label": "Employee Grade"
+    },
+    "employee_doc_verification": {
+      "type": "string",
+      "label": "Employee Doc Verification"
+    },
+    "employee_DOJ": {
+      "type": "string",
+      "label": "Employee Doj"
+    },
+    "employee_branch": {
+      "type": "string",
+      "label": "Employee Branch"
+    }
+  }
+}

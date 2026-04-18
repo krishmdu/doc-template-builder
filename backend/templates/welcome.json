@@ -1,0 +1,36 @@
+{
+  "name": "welcome",
+  "elements": [
+    {
+      "id": "1cc8369f-57f8-4e02-b166-4ad98ba9d0c8",
+      "type": "text",
+      "content": "Hi  {{name}}\nwelcome to  {{company name}}",
+      "data": [],
+      "rows": 0,
+      "cols": 0,
+      "rules": []
+    }
+  ],
+  "variableStyles": {
+    "name": {
+      "fontSize": "17",
+      "color": "#13d896",
+      "bold": true
+    },
+    "company name": {
+      "fontSize": "55",
+      "color": "#cd0adb",
+      "bold": true
+    }
+  },
+  "schema": {
+    "company name": {
+      "type": "string",
+      "label": "Company Name"
+    },
+    "name": {
+      "type": "string",
+      "label": "Name"
+    }
+  }
+}
